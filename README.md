@@ -23,3 +23,9 @@ and done)
 
 Another commit now some code.
 I can read/write sudoku puzzles, which is kind of nice.
+
+My backtracking solution works much better than I expected.
+I thought that it won't solve anything in resonable time.
+But it solved most puzzled well under 1 sec, the longest one took 3.4 sec.
+I updated run.sh script to run solution over all puzzles.
+

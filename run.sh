@@ -1,3 +1,7 @@
 #!/bin/bash
-python3 src/main.py < puzzles/s10a.txt
 
+for f in puzzles/*; 
+do 
+	echo $f; 
+	python3 src/main.py < $f; 
+done
