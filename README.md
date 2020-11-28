@@ -21,4 +21,5 @@ I added a puzzles directory with files from the site above.
 5. git push # entered my credentials
 and done)
 
-Now it's time to add a bit of code...
+Another commit now some code.
+I can read/write sudoku puzzles, which is kind of nice.
