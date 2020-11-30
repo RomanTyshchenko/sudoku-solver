@@ -6,17 +6,13 @@
 using namespace std;
 
 int main() {
-  vector<vector<int>> grid(9, vector<int>(9));
-  for (auto& row : grid) {
-    for (auto& dig : row) {
-      cin >> dig;
-    }
-  }
-  Sudoku s(grid);
-  s.print();
+  Sudoku s;
+  cin >> s;
+
+  cout << s;
   if (s.solve()) {
     cout << "Solved:\n";
-    s.print();
+    cout << s;
   } else {
     cout << "Can't solve this :(\n";
   }

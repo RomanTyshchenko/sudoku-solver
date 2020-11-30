@@ -6,19 +6,21 @@ class Sudoku {
   std::vector<std::vector<int>> grid;
 
  public:
+  Sudoku():grid(9, std::vector<int>(9, 0)) {}
+
   Sudoku(const std::vector<std::vector<int>>& grid_):grid(grid_) {}
 
   bool solve() {
     return solve_at(0, 0);
   }
 
-  void print() const {
-    for (const auto& row : grid) {
-      for (int d : row) {
-        std::cout << d << ' ';
-      }
-      std::cout << "\n";
-    }
+
+  std::vector<int>& operator[](std::size_t i) {
+    return grid[i];
+  }
+
+  const std::vector<int>& operator[](std::size_t i) const {
+    return grid[i];
   }
 
  private:
@@ -100,3 +102,21 @@ class Sudoku {
 };
 
 
+std::istream& operator>>(std::istream& is, Sudoku& s) {
+  for (int i = 0; i < 9; ++i) {
+    for (auto& d : s[i]) {
+      is >> d;
+    }
+  }
+  return is;
+}
+
+std::ostream& operator<<(std::ostream& os, const Sudoku& s) {
+  for (int i = 0; i < 9; ++i) {
+    for (int d : s[i]) {
+      os << d << ' ';
+    }
+    os << "\n";
+  }
+  return os;
+}
