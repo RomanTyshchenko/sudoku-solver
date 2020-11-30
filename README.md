@@ -43,20 +43,22 @@ Measurements below are done running ./timeit.sh script.
 All times are in seconds.
 
 - RapsPi - Raspberry Pi 4 (Broadcom BCM2711, Quad core Cortex-A72 (ARM v8) 64-bit SoC @ 1.5GHz)
+- Pixelbook - Pixelbook Go from linux virtual machine (Intel Core i5 8th Gen)
+- Xeon - linux workstation with Intel Xeon processor.
 
 Longest time:
-Solution | RaspPi  | Xeon
-----     | ----    | ---
-C++ -O2  | 0.65    | ???
-C++      | 5.4     | ???
-Python3  | 13.2    | ???
+Solution | RaspPi  | Pixelbook | Xeon
+----     | ----    | ---  | ---
+C++ -O2  | 0.65    | 0.15 | 0.10
+C++      | 5.4     | 1.5  | 0.96
+Python3  | 13.2    | 3.1  | 1.7
 
 Average time:
-Solution | RaspPi  | Xeon
-----     | ----    | ---
-C++ -O2  | 0.033   | ???
-C++      | 0.27    | ???
-Python3  | 0.66    | ???
+Solution | RaspPi  | Pixelbook | Xeon 
+----     | ----    | ---   | --- 
+C++ -O2  | 0.033   | 0.008 | 0.005
+C++      | 0.27    | 0.08  | 0.05
+Python3  | 0.66    | 0.16  | 0.08
 
 ## Next
 Rule based approach which mimic how I would solve it myself.
