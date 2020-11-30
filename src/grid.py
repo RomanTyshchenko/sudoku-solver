@@ -1,6 +1,6 @@
 class Sudoku:
     def __init__(self, grid):
-        self.grid = grid  # 9x9 matrix with 0 for empty cells
+        self.grid = grid  # 9x9 matrix with 0s for empty cells
 
     def at(self, row, col):
         res = self.grid[row][col]
@@ -15,26 +15,22 @@ class Sudoku:
     def valid_digits(self, row, col):
         if self.at(row, col):
             return [self.at(row, col)]
-        vd = set(range(1,10))
-        for dig in self.row(row):
-            vd.discard(dig)
-        for dig in self.column(col):
-            vd.discard(dig)
-        for dig in self.square(row, col):
-            vd.discard(dig)
-        return sorted(vd)
+        from itertools import chain
+        used_digs = chain(self.row(row), self.column(col), self.square(row, col))
+        used_digs = set(used_digs)
+        return [dig for dig in range(1, 10) if dig not in used_digs] 
 
     def row(self, row):
         return self.grid[row]
 
     def column(self, col):
-        return [self.grid[ri][col] for ri in range(9)]
+        return (row[col] for row in self.grid)
 
     def square(self, row, col):
         sr = 3 * (row // 3)
         sc = 3 * (col // 3)
-        return [self.grid[i][j] for i in range(sr, sr+3) \
-                                    for j in range(sc, sc+3)]
+        return (dig for row in self.grid[sr:sr+3] \
+                        for dig in row[sc:sc+3])
 
     def print(self):
         from sudoku_io import pretty_print
