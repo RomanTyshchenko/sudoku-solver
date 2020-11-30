@@ -36,5 +36,27 @@ I thought that it won't solve anything in resonable time.
 But it solved most puzzled well under 1 sec, the longest one took 3.4 sec.
 I updated run.sh script to run solution over all puzzles.
 
+## Measurements
+How fast is Python vs C++ or Raspberry Pi vs Intel Xeon?
+
+Measurements below are done running ./timeit.sh script.
+All times are in seconds.
+
+- RapsPi - Raspberry Pi 4 (Broadcom BCM2711, Quad core Cortex-A72 (ARM v8) 64-bit SoC @ 1.5GHz)
+
+Longest time:
+Solution | RaspPi  | Xeon
+----     | ----    | ---
+C++ -O2  | 0.65    | ???
+C++      | 5.4     | ???
+Python3  | 13.2    | ???
+
+Average time:
+Solution | RaspPi  | Xeon
+----     | ----    | ---
+C++ -O2  | 0.033   | ???
+C++      | 0.27    | ???
+Python3  | 0.66    | ???
+
 ## Next
 Rule based approach which mimic how I would solve it myself.
