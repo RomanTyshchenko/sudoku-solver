@@ -4,23 +4,49 @@
 class Sudoku {
  private:
   std::vector<std::vector<int>> grid;
+  using mask = int;
+  std::vector<mask> used_in_row;
+  std::vector<mask> used_in_col;
+  std::vector<mask> used_in_square;
 
  public:
-  Sudoku():grid(9, std::vector<int>(9, 0)) {}
+  Sudoku()
+    : grid(9, std::vector<int>(9, 0))
+    , used_in_row(9)
+    , used_in_col(9)
+    , used_in_square(9) {}
 
-  Sudoku(const std::vector<std::vector<int>>& grid_):grid(grid_) {}
+  Sudoku(const std::vector<std::vector<int>>& grid_)
+    : grid(grid_)
+    , used_in_row(9)
+    , used_in_col(9)
+    , used_in_square(9) {
+    for (int r = 0; r < 9; ++r) {
+      for (int c = 0; c < 9; ++c) {
+	if (auto dig = grid[r][c]; dig > 0) {
+	  // Fills used_*
+	  set(r, c, dig);
+	}
+      }
+    }
+  }
 
   bool solve() {
     return solve_at(0, 0);
   }
 
-
-  std::vector<int>& operator[](std::size_t i) {
+  const std::vector<int>& operator[](std::size_t i) const {
     return grid[i];
   }
 
-  const std::vector<int>& operator[](std::size_t i) const {
-    return grid[i];
+  void set(int row, int col, int dig) {
+    if (dig > 0) {
+      used_in_row[row] += (1 << dig);
+      used_in_col[col] += (1 << dig);
+      used_in_square[square_index(row, col)] += (1 << dig);
+    }
+
+    grid[row][col] = dig;
   }
 
  private:
@@ -36,14 +62,18 @@ class Sudoku {
     if (is_filled(row, col)) {
       return solve_at(nrow, ncol);
     }
-    auto valid_digs = valid_digits(row, col);
-    for (int dig : valid_digs) {
-      set(row, col, dig);
-      if (solve_at(nrow, ncol)) {
-        return true;
+    mask used_digs = used_in_row[row] |
+      used_in_col[col] |
+      used_in_square[square_index(row, col)];
+    for (int dig = 1; dig <= 9; ++dig) {
+      if (((1 << dig) & used_digs) == 0) {
+	set(row, col, dig);
+	if (solve_at(nrow, ncol)) {
+	  return true;
+	}
+	reset(row, col);
       }
     }
-    reset(row, col);
     return false;
   }
   
@@ -51,61 +81,27 @@ class Sudoku {
     return grid[row][col] > 0;
   }
 
-  void set(int row, int col, int dig) {
-    grid[row][col] = dig;
-  }
-
   void reset(int row, int col) {
+    int dig = grid[row][col];
     grid[row][col] = 0;
+
+    used_in_row[row] -= (1 << dig);
+    used_in_col[col] -= (1 << dig);
+    used_in_square[square_index(row, col)] -= (1 << dig);
   }
 
-  std::vector<int> valid_digits(int r, int c) const {
-    std::vector<int> is_valid(10, 1);
-    for (int d : row(r))
-      is_valid[d] = 0;
-    for (int d : column(c))
-      is_valid[d] = 0;
-    for (int d : square(r, c))
-      is_valid[d] = 0;
-    std::vector<int> res;
-    for (int d = 1; d <= 9; ++d) {
-      if (is_valid[d]) {
-        res.push_back(d);
-      }
-    }
-    return res;
-  }
-  
-  std::vector<int> row(int r) const {
-    return grid[r];
-  }
-
-  std::vector<int> column(int col) const {
-    std::vector<int> res(9);
-    for (int r = 0; r < 9; ++r) {
-      res[r] = grid[r][col];
-    }
-    return res;
-  }
-
-  std::vector<int> square(int row, int col) const {
-    std::vector<int> res;
-    int sr = 3 * (row / 3);
-    int sc = 3 * (col / 3);
-    for (int r = sr; r < sr + 3; ++r) {
-      for (int c = sc; c < sc + 3; ++c) {
-        res.push_back(grid[r][c]);
-      }
-    }
-    return res;
+  int square_index(int row, int col) const {
+    return (row / 3) * 3 + (col / 3);
   }
 };
 
 
 std::istream& operator>>(std::istream& is, Sudoku& s) {
-  for (int i = 0; i < 9; ++i) {
-    for (auto& d : s[i]) {
-      is >> d;
+  int dig = 0;
+  for (int r = 0; r < 9; ++r) {
+    for (int c = 0; c < 9; ++c) {
+      is >> dig;
+      s.set(r, c, dig);
     }
   }
   return is;

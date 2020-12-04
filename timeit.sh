@@ -10,8 +10,8 @@ do
 done
 
 echo "Compile..."
-g++ src/cpp/solve_many.cpp -o cpp_not_opt
-g++ -O2 src/cpp/solve_many.cpp -o cpp_opt
+g++ -O0 -std=c++17 src/cpp/solve_many.cpp -o cpp_not_opt
+g++ -O2 -std=c++17 src/cpp/solve_many.cpp -o cpp_opt
 
 echo "Run C++ optimized"
 ./cpp_opt < $ALL_PUZZLES
