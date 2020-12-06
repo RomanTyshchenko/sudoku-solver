@@ -17,8 +17,8 @@ while True:
     if not name:  # reached the end of the input
         break
 
-    p = Sudoku()
-    p.read_stdin()
+    s = Sudoku()
+    s.read_stdin()
     # p.print()
 
     start_time = time.time()
