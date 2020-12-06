@@ -1,6 +1,4 @@
-from sudoku_io import *
-from grid import Sudoku
-from backtracking import solve
+from sudoku import Sudoku
 import time
 import sys
 
@@ -16,16 +14,19 @@ def read_name():
 ex_times = []
 while True:
     name = read_name()
-    if not name:
+    if not name:  # reached the end of the input
         break
 
-    raw_puzzle = read_sudoku()
-    p = Sudoku(raw_puzzle)
+    p = Sudoku()
+    p.read_stdin()
     # p.print()
 
     start_time = time.time()
-    solve(p)
+    ok = s.solve()
     time_sec = time.time() - start_time
+    if not ok:
+        print('The world is broken...')
+        sys.exit()
     print(f'Solved {name} in {time_sec:.4f} sec.')
     # p.print()
     ex_times.append(time_sec)
