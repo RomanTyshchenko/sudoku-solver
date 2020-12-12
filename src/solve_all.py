@@ -31,5 +31,5 @@ while True:
     # p.print()
     ex_times.append(time_sec)
 
-print(f"Average time is {sum(ex_times) / len(ex_times):.4f} sec.")
-print(f"Longest time is {max(ex_times):.4f} sec.")
+print(f"Average time: {sum(ex_times) / len(ex_times):.4f} sec.")
+print(f"Longest time: {max(ex_times):.4f} sec.")
