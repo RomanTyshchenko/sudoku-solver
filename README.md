@@ -46,21 +46,22 @@ All times are in seconds.
 - S9 - Galaxy S9 Qualcomm Snapdragon 845 (Octa-core 4×2.8 GHz & 4×1.7 GHz)
 - MBP - MacBook Pro 2015 (2.5GHz Intel Core i7-4870HQ)
 - Pixelbook - Pixelbook Go from linux virtual machine (Intel Core i5 8th Gen)
+- ThinkCentre - tiny ThinkCentre M93p under WSL on Windows (Intel i5-4570T 2.9 GHz up to 3.6 GHz)
 - Xeon - linux workstation with Intel Xeon processor (turbo speed is over 4GHz).
 
 Longest time:
-Solution | RaspPi | S9 | MBP | Pixelbook | Xeon
-----     | ----   |--- | --- | ---       | ---
-C++ -O2  | 0.65   |0.19| 0.54| 0.15      | 0.10
-C++      | 5.4    | 5.9| 1.4 | 1.5       | 0.96
-Python3  | 13.2   | 7.7| 3.7 | 3.1       | 1.7
+Solution | RaspPi | S9 | MBP | Pixelbook | ThinkCentre | Xeon
+----     | ----   |--- | --- | ---       | ---------   | ---
+C++ -O2  | 0.65   |0.19| 0.54| 0.15      | 0.13        | 0.10
+C++      | 5.4    | 5.9| 1.4 | 1.5       | 1.22        | 0.96
+Python3  | 13.2   | 7.7| 3.7 | 3.1       | 2.8         | 1.7
 
 Average time:
-Solution | RaspPi  | S9 | MBP | Pixelbook | Xeon 
-----     | ----    | -- | --- | ---       | --- 
-C++ -O2  | 0.033  |0.012|0.027| 0.008     | 0.005
-C++      | 0.27    | 0.3| 0.07| 0.08      | 0.05
-Python3  | 0.66    |0.39|0.19 | 0.16      | 0.08
+Solution | RaspPi  | S9 | MBP | Pixelbook | ThinkCentre |  Xeon 
+----     | ----    | -- | --- | ---       | ---         | ---
+C++ -O2  | 0.033  |0.012|0.027| 0.008     | 0.007       | 0.005
+C++      | 0.27    | 0.3| 0.07| 0.08      | 0.06        | 0.05
+Python3  | 0.66    |0.39|0.19 | 0.16      | 0.14        | 0.08
 
 Summary:
 - Old MacBook Pro is slow: slower than Pixelbook and S9 for running optimized C++. Maybe 4th gen intel i7 is so slow or ...
