@@ -74,7 +74,7 @@ Rule based approach which mimic how I would solve it myself.
 ## How to
 ### Clone repository
 ```bash
-$ git clone https://github.com/RomanTyshchenko/sudoku-solver.git
+git clone https://github.com/RomanTyshchenko/sudoku-solver.git
 ```
 
 ### Run timing test
