@@ -70,3 +70,15 @@ Summary:
 
 ## Next
 Rule based approach which mimic how I would solve it myself.
+
+## How to
+### Clone repository
+$ git clone https://github.com/RomanTyshchenko/sudoku-solver.git
+
+### Run timing test
+$ cd sudoku-solver
+$ ./timeit.sh
+
+### Install C++ (if needed)
+$ sudo apt-get install g++
+
